@@ -1,0 +1,231 @@
+// Variables for my project 
+
+// Colors 
+$primary-color : #FFFD92;
+$secondary-color : #FE4A49;
+$tertiary-color : rgb(198, 198, 198);
+
+// Font-size
+$text-normal : 1.7rem;
+$title-3 : 2.4rem;
+$title-2 : 4rem;
+$title-1 : 6rem;
+
+// font-size : 62.5% => 1rem = 10px
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+};
+
+html{
+    font-size: 62.5%;
+}
+
+body {
+    font-size: $text-normal;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+    box-shadow: 0rem 0.1rem 2em lightgray;
+}
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem;
+    margin: 0 auto;
+
+    .header-left{
+        display: inline-block;
+        background-color: $primary-color;
+        padding: 2rem 3rem;
+        border-radius: 1rem 5rem;
+        box-shadow:-1rem 0.6rem $secondary-color;
+    }
+    .logo{
+        font-size: 3.2rem;
+        text-decoration: none;
+        cursor: pointer;
+        color: $secondary-color;
+        
+        
+        :hover{
+            opacity: 100%;
+        }
+    }
+
+    .header-right{
+        display: flex;
+        font-size: 1.6rem;
+        li{
+            list-style-type: none;
+            padding: 1rem 1.3rem;
+    
+            a{
+                text-decoration: none;
+                color: black;
+                padding: 0.8rem;
+            }
+        }
+    
+        .nav-links{
+            display: flex;
+    
+            a:hover{
+                text-decoration: underline;
+                transition: 0.5s;
+            }
+        }
+    
+        .nav-authentifications{
+            display: flex;
+            padding: 0;
+    
+            .login-btn{
+                background-color: $secondary-color;
+                border-radius: 3rem;
+                a{
+                    color: white;
+                }
+            }
+    
+            .login-btn:hover{
+                background-color: #9f2525;
+                transition: 0.5s;
+            }
+    
+            .sign-up-btn{
+                margin-left: 1rem;
+                background-color: $tertiary-color;
+                border-radius: 3rem; 
+            }
+    
+            .sign-up-btn:hover{
+                background-color: #00000075;
+                transition: 0.5s;
+            }
+        }
+    }
+}
+
+.form-container{
+    margin: 0, auto;
+    display: flex;
+}
+//  CARDS STYLES
+.card-container{
+    display: grid;
+    margin: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(26rem, 30rem));
+    grid-gap : 2rem;
+    justify-content: center;  
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    box-shadow: 0rem 2rem 2rem $tertiary-color;
+    // cursor: pointer;
+    transition: transform 250ms ease-in;
+    position: relative;
+    
+    &-icon{
+        position: absolute;
+        bottom : 13rem;
+        right: 1.2rem;
+
+        a{
+            color: #000;
+        }
+    }
+
+    &-image{
+        height: 26rem;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &-title{
+        padding: 1rem;
+        font-size: $title-3;
+    }
+
+    &-description{
+      padding: 0 1rem;
+      font-size: $text-normal;  
+    }
+
+    &-button{
+        display: block;
+        font-size: $text-normal;
+        font-weight: bold;
+        text-decoration: none;
+        text-align: center;
+        padding: 1rem;
+        margin: 1rem 8rem;
+        color: $secondary-color;
+        border: 0.1rem   solid $secondary-color ;
+        background-color: transparent;
+        border-radius: 0.3rem;
+        transition: 
+        background 200ms ease-in,
+        color 200ms ease-in;
+    }
+
+    &:hover{
+        transform: scale(1.03);
+
+    }
+
+    &:hover &-button{
+        background-color: $secondary-color;
+        color: wheat;
+    }
+}
+
+// FORM STYLE
+
+// FORM REGISTER
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80vh;
+    // 60vh mobile
+    margin: 4rem auto;
+    align-items: center;
+    font-size: $text-normal;
+    max-width: 50%;
+    // 80% mobile
+    width: 100%;
+    border-radius: 1rem;
+    background: rgb(119, 205, 149);
+    
+    .form{
+        display: flex;
+        flex-direction: column;
+        // justify-content: space-between;
+    }
+}
+
+.validated{
+    color: rgb(166, 166, 166);
+
+    &-icon{
+        color: rgb(76, 161, 76);
+    }
+}
+
+
