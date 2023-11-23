@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom'
 import axios from "axios";
 import {edit} from 'react-icons-kit/feather/edit'
 import Icon from "react-icons-kit";
+import Category from "../components/Category";
 
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
     },[])
     return (
       <>
+      <Category />
       <section className="card-container">
         {recipes.map((recipe, index) => 
 

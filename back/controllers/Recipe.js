@@ -5,12 +5,11 @@ import Recipe from "../models/RecipeModel.js"
 export const GetAllRecipe = async(req, res) => {
     try {
         let recipe = await Recipe.find({});
-        res.json(recipe);
-        console.log(recipe[0])
+        res.status(200).json(recipe);
     } catch (error) {
-        console.log("Cannot get all recipe");
+        res.status(400).send({message : error.message || "Error all recipe "})
     }     
-}
+};
 
 // Add Recipe 
 export const AddRecipe = async (req, res) => {
@@ -28,61 +27,58 @@ export const AddRecipe = async (req, res) => {
             note 
         } = req.body;
 
-        const steps = JSON.parse(req.body.steps)
-        console.log(steps)
+        const steps = JSON.parse(req.body.steps);
+        
+        let newRecipe;
 
-        // Add a new recipe on my DB
-        let newRecipe = new Recipe({
-            name : name,
-            category : category,
-            difficulty : difficulty,
-            ingredients : ingredients,
-            serve : serve,
-            time : time,
-            description : description,
-            steps : steps,
-            profile : profile,
-            note : note,
-            images : {
-                src : req.file.filename,
-                alt : req.file.originalname
-            }
-        })
+        // Add a new recipe on my Blog 
+        if(req.file){
+            newRecipe = new Recipe({
+                name : name,
+                category : category,
+                difficulty : difficulty,
+                ingredients : ingredients,
+                serve : serve,
+                time : time,
+                description : description,
+                steps : steps,
+                profile : profile,
+                note : note,
+                images : {
+                    src : req.file.filename,
+                    alt : req.file.originalname
+                }
+            })
+        } else {
+            newRecipe = new Recipe({
+                name : name,
+                category : category,
+                difficulty : difficulty,
+                ingredients : ingredients,
+                serve : serve,
+                time : time,
+                description : description,
+                steps : steps,
+                profile : profile,
+                note : note,
+                images : {
+                    src : "",
+                    alt : ""
+                }
+        })}
+        
 
         await newRecipe.save();
 
-        res.json({message : "Votre recette à bien été ajouté :)"})
+        res.status(200).json({message : "Votre recette à bien été ajouté :)"})
         
     } catch (error) {
-        res.json({message : "Impossible d'ajouté votre recette  :("})
+        res.status(400).json({message : "Impossible d'ajouté votre recette  :("})
+        console.log(error)
     }
 }
 
-// View One Recipe
-export const GetOneRecipe = async (req, res) => {
-    const {id} = req.params
-    try {
-
-        const recipe = await Recipe.findById(id)
-        res.json(recipe)
-        
-    } catch (error) {
-        console.log("Cannot get details params id")
-    }
-}
-
-// Update One Recipe
-export const UpdateOneRecipe = async (req, res) => {
-    const {id} = req.params
-    try {
-        const update = await Recipe.findById(id)
-        res.json(update)
-        console.log(update)
-    } catch (error) {
-        console.log('Cannot update')
-    }   
-}
-
+// Update one recipe
 export const UpdateOneRecipeSubmit = async (req, res) => {
     const {id} = req.params
     try {
@@ -123,10 +119,56 @@ export const UpdateOneRecipeSubmit = async (req, res) => {
 
         await Recipe.updateOne({_id : id}, editRecipe)
 
-        res.json(editRecipe)
+        res.status(200).json(editRecipe)
         console.log(editRecipe)
     
     } catch (error) {
-        res.json({message : `Impossible de modifier l'article`})
+        res.status(400).json({message : `Impossible de modifier l'article`})
+        console.log(error)
     }
+};
+
+// Delete one recipe
+export const DeleteOneRecipe = async (req, res) => {
+    const {id} = req.params;
+    try {
+        let deleteRecipe = await Recipe.deleteOne({_id : id })
+
+        if(!deleteRecipe){return res.send("Recette introuvable")};
+
+        res.status(200);
+    } catch (error) {
+        res.status(400)
+        console.log(error)
+    }
+
+
 }
+
+// Get recipe by category 
+export const GetRecipeByCategory = async (req, res) => {
+    const {name} = req.params
+    console.log(name)
+    try {
+        const recipe = await Recipe.find({category : name});
+        res.status(200).json(recipe);
+        
+    } catch (error) {
+        res.status(400).json({message : "Impossible de voir les recettes " + name})
+    }
+    
+};
+
+// View One Recipe
+export const GetOneRecipe = async (req, res) => {
+    const {id} = req.params
+    try {
+
+        const recipe = await Recipe.findById(id)
+        res.status().json(recipe)
+        
+    } catch (error) {
+        res.status(400)
+        console.log(error)
+    }
+};

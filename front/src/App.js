@@ -5,6 +5,7 @@ import Test from "./components/Test";
 import Home from './pages/Home'
 import OneRecipe from "./pages/OneRecipe";
 import Modified from "./pages/Modified";
+import OneCategory from "./pages/OneCategory";
 
 
 
@@ -21,6 +22,7 @@ function App() {
     <Route path="/recette/:id" element={<OneRecipe />} />
     <Route path="/modifier/:id" element={<Modified />} />
     <Route path="/register" element={<Register />}/>
+    <Route path="/:name/:id" element={<OneCategory />}/>
   </Routes>
    </main>
   </>

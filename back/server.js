@@ -2,7 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/database.js';
-import PostRouter from './routes/PostRouter.js';
+import recipeRouter from './routes/RecipeRouter.js';
+import categoryRouter from './routes/CategoryRouter.js';
+import userRouter from './routes/UserRouter.js';
+
 
 
 const app = express();
@@ -19,10 +22,12 @@ app.use(express.urlencoded({extended: true}));
 // MIDLEWARE
 app.use(express.static("public"));
 
-app.use(cors())
+app.use(cors());
 
 
-app.use(PostRouter)
+app.use(recipeRouter);
+app.use(categoryRouter);
+app.use(userRouter);
 
 // SERVEUR CONNECT
 app.listen(process.env.PORT, () => {

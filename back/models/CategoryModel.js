@@ -2,9 +2,13 @@ import mongoose from "mongoose";
 
 
 let categorySchenma = mongoose.Schema({
-    name : String,
-    icon : String,
-    bg_img : String
+    name : {
+        type : String,
+        lowercase : true
+    },
+    image : {
+        type : String
+    }
 },{
     timestamps : true
 })

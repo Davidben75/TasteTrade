@@ -32,7 +32,7 @@ body {
 }
 
 .container{
-    width: 80%;
+    max-width: 90%;
     margin: 0 auto;
     
 }
@@ -51,6 +51,13 @@ body {
     text-decoration: none;
     cursor: pointer;
     color: $secondary-color;
+
+    &-container{
+        a{
+            color: $secondary-color;
+        }
+        
+    }
 }
 
 .nav {
@@ -59,17 +66,20 @@ body {
       }
       a {
         text-decoration: none;
-        color: rgb(33, 24, 24);
       }
     display: flex;
     align-items: center;
     justify-content: space-around;
-    height: 8vh;
-    background: rgb(228, 234, 239);
+    &-menu{
+        a {
+            color: black;
+        }
+    }
   }
 
 .nav-brand {
     text-transform: uppercase;
+    
   }
 
 .nav-menu {
@@ -114,28 +124,8 @@ body {
     transition: 0.5s;
 }
 
-// Navbar responsive
-@media screen and (max-width: 768px) {
-    .nav-toggler {
-      display: block;
-      cursor: pointer;
-    }
-    .nav-menu {
-      position: fixed;
-      top: 7vh;
-      right: 0;
-      height: 93vh;
-      width: 50vw;
-      background: rgb(0, 33, 65);
-      flex-direction: column;
-      transform: translateX(100%);
-      transition: 0.5s ease-in;
-    }
-  }
-  /* Active Class */
-  .nav-active {
-    transform: translateX(0%);
-  }
+
+
   
   /* Toggle Icon Animation */
   
@@ -209,8 +199,7 @@ body {
     display: grid;
     margin: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(26rem, 30rem));
-    grid-gap : 2rem;
-    justify-content: center;  
+    grid-gap : 2rem;  
 }
 
 .card{
@@ -311,4 +300,63 @@ body {
     }
 }
 
+// RESPONSIVE 
+@media screen and (max-width: 768px) {
 
+    //***********************//
+    // NAVBAR 
+    //***********************//
+    .nav{
+        justify-content: space-between;
+        margin: 1rem 3rem;
+
+        &-toggler {
+            display: block;
+            cursor: pointer;
+          }
+        
+          &-menu {
+            position: fixed;
+            top: 6rem;
+            right: 0;
+            width: 30%;
+            background: rgb(243, 243, 243);
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: 0.5s ease-in;
+            z-index: 200;
+        }
+        &-active {
+            transform: translateX(0%);
+        }
+    }
+    
+    
+
+    // CARDS 
+
+    .card-container{
+        justify-content: center;
+    }
+  }
+
+  // CATEGORY
+  .flex{
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 90%;
+    figure{
+        width: 10%;
+        align-items: center;        
+        img{
+            width: 100%;
+        }
+    }
+  }
+
+  .page-header{
+    height: 20rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }

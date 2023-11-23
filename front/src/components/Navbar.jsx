@@ -18,7 +18,7 @@ const Navbar = ()  => {
       <nav className="nav">
         <span className="logo-container">
             <NavLink to={"/"} className="nav-brand logo">
-                Taste Tadre
+                Taste Trade
             </NavLink>
         </span>
         

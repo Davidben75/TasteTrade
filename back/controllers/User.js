@@ -15,12 +15,12 @@ export const LoginSubmit = async (req, res) => {
         // Il renvoie true ou false
         let passwordCorrect = bcrypt.compareSync(password, user.password) 
         if(!passwordCorrect){
-            res.json("Mot de passe incorrect, try again!")
+            res.status(400).json("Mot de passe incorrect, try again!")
         }
-        res.json("Super tu es désormais connecté")
+        res.status(200).json("Super tu es désormais connecté")
         
     } catch (error) {
-        res.json("Impossible de se connecter")
+        res.status(400).json("Impossible de se connecter")
     }       
 }
 
