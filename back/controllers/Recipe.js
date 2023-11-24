@@ -165,7 +165,7 @@ export const GetOneRecipe = async (req, res) => {
     try {
 
         const recipe = await Recipe.findById(id)
-        res.status().json(recipe)
+        res.status(200).json(recipe)
         
     } catch (error) {
         res.status(400)

@@ -1,7 +1,5 @@
 import express from 'express'
-import { GetAllCategories, GetOneCategory } from '../controllers/Category.js';
 import { AddRecipe, GetAllRecipe, GetOneRecipe,  GetRecipeByCategory, UpdateOneRecipeSubmit } from '../controllers/Recipe.js';
-import { LoginSubmit, RegisterSubmit } from '../controllers/User.js';
 import upload from '../middlewares/multer.js';
 
 

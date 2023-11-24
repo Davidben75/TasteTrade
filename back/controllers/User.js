@@ -27,7 +27,7 @@ export const LoginSubmit = async (req, res) => {
 // Controller to create à new user
 export const RegisterSubmit = async (req, res) =>  {
     try {
-        const {email , username, bio, password} = req.body
+        const {email , username, password} = req.body
 
         let mailverif = await User.findOne({email : email})
         let usernameverif = await User.findOne({username : username})
@@ -37,19 +37,18 @@ export const RegisterSubmit = async (req, res) =>  {
             return res.json({message : "Cet email existe déja !"})
         }
         if (usernameverif) {
-            return res.json({message : "Cet pseudo existe déja !"})
+            return res.json({message : "Ce pseudo existe déja !"})
         }
 
         let newUser = new User({
             email : email,
             username : username,
-            bio : bio,
             password : password,
             // role : "user",
             favoris :[] 
         })
 
-        newUser.save();
+        await newUser.save();
 
         res.json({message : "Bienvenu parmis nous"})
     } catch (error) {

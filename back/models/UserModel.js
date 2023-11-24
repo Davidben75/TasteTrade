@@ -15,10 +15,6 @@ let userSchema=mongoose.Schema({
         lowercase: true,
         required : true
     },
-    bio : {
-        type :String,
-        lowercase: true
-    },
     password : {
         type : String,
         required : true
@@ -26,6 +22,9 @@ let userSchema=mongoose.Schema({
     role : {
         type : String,
         default : "user"
+    },
+    favoris : {
+        type : Array
     }
 },{
     timestamps : true
