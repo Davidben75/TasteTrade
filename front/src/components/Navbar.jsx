@@ -24,7 +24,7 @@ const Navbar = ()  => {
         
         <ul className={active}>
           <li className="nav-item">
-            <NavLink href="#" className="nav-link">
+            <NavLink to={"/"} className="nav-link">
               Accueil
             </NavLink>
           </li>
@@ -34,12 +34,12 @@ const Navbar = ()  => {
             </NavLink>
           </li>
           <li className="nav-item login-btn">
-            <NavLink href="#" className="nav-link">
+            <NavLink to={"/page/connexion"} className="nav-link">
               Se connecter
             </NavLink>
           </li>
           <li className="nav-item signup-btn">
-            <NavLink href="#" className="nav-link ">
+            <NavLink to={"/page/inscription"} className="nav-link ">
               S'inscrire
             </NavLink>
           </li>

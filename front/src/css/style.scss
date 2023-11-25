@@ -18,13 +18,17 @@ $title-1 : 6rem;
     box-sizing: border-box;
 };
 
+h1, h2, h3, h4{
+    font-family: Comfortaa;
+} 
+
 html{
     font-size: 62.5%;
 }
 
 body {
     font-size: $text-normal;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Roboto ,Arial, Helvetica, sans-serif;
 }
 
 .header {
@@ -61,44 +65,69 @@ body {
 }
 
 .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 2rem 0;
+    margin-bottom: 3rem;
     li {
         list-style: none;
       }
       a {
         text-decoration: none;
       }
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    
     &-menu{
         a {
             color: black;
         }
     }
-  }
 
-.nav-brand {
-    text-transform: uppercase;
+    &-brand {
+        text-transform: uppercase;
+        
+      }
     
+    &-menu {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 3rem;
+      }
+    
+    &-toggler {
+        display: none;
+        div {
+            width: 2.5rem;
+            height: 0.2rem;
+            margin: 0.4rem;
+            background: rgb(204, 204, 204);
+            transition: 0.3s ease-in;
+        }
+      }
+
+      // Category Icons style
+      &_category{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 0 auto;
+        max-width: 90%;
+        a{
+            margin: auto;
+        }
+        figure{
+            width: 10%;
+            align-items: center;        
+            img{
+                width: 100%;
+            }
+        }
+      }
+
   }
 
-.nav-menu {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 3rem;
-  }
 
-.nav-toggler {
-    display: none;
-    div {
-        width: 2.5rem;
-        height: 0.2rem;
-        margin: 0.4rem;
-        background: rgb(204, 204, 204);
-        transition: 0.3s ease-in;
-    }
-  }
 
 .login-btn{
     background-color: $secondary-color;
@@ -194,78 +223,7 @@ body {
     margin: 0, auto;
     display: flex;
 }
-//  CARDS STYLES
-.card-container{
-    display: grid;
-    margin: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(26rem, 30rem));
-    grid-gap : 2rem;  
-}
 
-.card{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: 0.8rem;
-    overflow: hidden;
-    box-shadow: 0rem 2rem 2rem $tertiary-color;
-    // cursor: pointer;
-    transition: transform 250ms ease-in;
-    position: relative;
-    
-    &-icon{
-        position: absolute;
-        bottom : 13rem;
-        right: 1.2rem;
-
-        a{
-            color: #000;
-        }
-    }
-
-    &-image{
-        height: 26rem;
-        width: 100%;
-        object-fit: cover;
-    }
-
-    &-title{
-        padding: 1rem;
-        font-size: $title-3;
-    }
-
-    &-description{
-      padding: 0 1rem;
-      font-size: $text-normal;  
-    }
-
-    &-button{
-        display: block;
-        font-size: $text-normal;
-        font-weight: bold;
-        text-decoration: none;
-        text-align: center;
-        padding: 1rem;
-        margin: 1rem 8rem;
-        color: $secondary-color;
-        border: 0.1rem   solid $secondary-color ;
-        background-color: transparent;
-        border-radius: 0.3rem;
-        transition: 
-        background 200ms ease-in,
-        color 200ms ease-in;
-    }
-
-    &:hover{
-        transform: scale(1.03);
-
-    }
-
-    &:hover &-button{
-        background-color: $secondary-color;
-        color: wheat;
-    }
-}
 
 // FORM STYLE
 
@@ -340,19 +298,7 @@ body {
     }
   }
 
-  // CATEGORY
-  .flex{
-    display: flex;
-    justify-content: space-evenly;
-    max-width: 90%;
-    figure{
-        width: 10%;
-        align-items: center;        
-        img{
-            width: 100%;
-        }
-    }
-  }
+
 
   .page-header{
     height: 20rem;

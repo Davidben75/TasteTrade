@@ -1,0 +1,71 @@
+@import "../style.scss";
+
+
+
+.form_login {
+    width: 45rem;
+    margin: 7rem auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.8rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 1rem;
+        color: #555;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1.5rem;
+        box-sizing: border-box;
+        border: 0.1rem solid #ccc;
+        border-radius: 0.4rem;
+      }
+      button {
+        background-color: $secondary-color;
+        display: block;
+        margin: auto;
+        width: 14rem;
+        color: white;
+        padding: 1rem 1.5rem;
+        border: none;
+        border-radius: 0.4rem;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $tertiary-color;
+          }
+      }
+
+      p {
+        color: #333;
+        margin-top: 1.5rem;
+        text-align: center;
+      }
+      
+      /* Styles responsifs */
+      @media screen and (max-width: 600px) {
+        .form_login {
+          max-width: 100%;
+        }
+      }
+  }
+  
+
+  
+
+  
+
+  
+
+  
+
+  

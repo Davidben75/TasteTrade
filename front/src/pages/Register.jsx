@@ -22,7 +22,6 @@ const Register = () => {
         email : "",
         username : "",
         password : "",
-        picture : "",
     })
 
     
@@ -103,14 +102,15 @@ const Register = () => {
     return (
         <>
     
-        <section className="form-container">
+        <section className="form_login">
             <h2>S'inscrire</h2>
             <form method="post" onSubmit={handleSubmit}
             className="form"
             >
             
             <span className="input-group">  
-                
+            <label htmlFor="email" className="input-label">
+            Email :   
                 <input 
                 type="text"
                 id="email" 
@@ -118,13 +118,14 @@ const Register = () => {
                 value={user.email}
                 onChange={handleChange}
                 />
-                <label htmlFor="email" className="input-label">
-                    Email :    
+                
+                    
                 </label>
             </span> 
 
             <span className="input-group">  
-                
+            <label htmlFor="username" className="input-label">
+                    Nom d'utilisateur : 
                 <input 
                 type="text"
                 id="username" 
@@ -132,33 +133,15 @@ const Register = () => {
                 value={user.username}
                 onChange={handleChange}
                 />
-                <label htmlFor="username" className="input-label">
-                    Nom d'utilisateur :    
+                   
                 </label>
             </span> 
                 
             <br /> <br />
 
-
             <span className="input-group">
-                
-                    <input 
-                    type="text" 
-                    id="username"
-                    name="username"
-                    value={user.username} 
-                    onChange={handleChange}   
-                    />
-                <label htmlFor="username" className="input-label">
-                    Nom d'utilisateur :    
-                </label> 
-            </span>
-                
-            <br /> <br />
-
-
-            <span className="input-group">
-            
+            <label htmlFor="password" className="input-label">
+                    Mot de passe  :
             <input 
                 type={type}
                 id="password" 
@@ -166,8 +149,7 @@ const Register = () => {
                 onChange={handleChange}
                 />
 
-                <label htmlFor="password" className="input-label">
-                    Mot de passe  :
+                
                 </label>
 
                 {type==="password"?(

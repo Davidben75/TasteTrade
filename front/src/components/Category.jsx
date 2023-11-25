@@ -34,7 +34,7 @@ const Category = () => {
 
     return (
         <>
-            <article className='flex'>
+            <nav className='nav_category'>
             {category && (
                 category.map((one, i) => 
                 <NavLink to={`/${one.name}/${one._id}`} key={i}>
@@ -46,7 +46,7 @@ const Category = () => {
                 )
                 
                 )}
-            </article>
+            </nav>
                 
         </>
     );

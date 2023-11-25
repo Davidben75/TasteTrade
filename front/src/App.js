@@ -1,6 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 import "./css/style.css"
+import "./css/admin/admin.css" 
+import "./css/card/card.css"
+import "./css/from_user/form_user.css"
 import Home from './pages/Home'
 import Modified from "./pages/Modified";
 import OneCategory from "./pages/OneCategory";
@@ -23,7 +27,8 @@ function App() {
     <Route path="/data/admin" element={<AdminPage/>}/>
     <Route path="/recette/:id" element={<RecipeDetail />} />
     <Route path="/modifier/:id" element={<Modified />} />
-    <Route path="/register" element={<Register />}/>
+    <Route path="/page/inscription" element={<Register />}/>
+    <Route path="/page/connexion" element={<Login/>}/>
     <Route path="/:name/:id" element={<OneCategory />}/>
   </Routes>
    </main>

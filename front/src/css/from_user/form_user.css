@@ -48,8 +48,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 2rem 0;
-  margin-bottom: 3rem;
 }
 .nav li {
   list-style: none;
@@ -60,15 +58,18 @@ body {
 .nav-menu a {
   color: black;
 }
+
 .nav-brand {
   text-transform: uppercase;
 }
+
 .nav-menu {
   display: flex;
   align-items: center;
   justify-content: space-around;
   gap: 3rem;
 }
+
 .nav-toggler {
   display: none;
 }
@@ -78,23 +79,6 @@ body {
   margin: 0.4rem;
   background: rgb(204, 204, 204);
   transition: 0.3s ease-in;
-}
-.nav_category {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 90%;
-}
-.nav_category a {
-  margin: auto;
-}
-.nav_category figure {
-  width: 10%;
-  align-items: center;
-}
-.nav_category figure img {
-  width: 100%;
 }
 
 .login-btn {
@@ -230,6 +214,19 @@ body {
     justify-content: center;
   }
 }
+.flex {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 90%;
+}
+.flex figure {
+  width: 10%;
+  align-items: center;
+}
+.flex figure img {
+  width: 100%;
+}
+
 .page-header {
   height: 20rem;
   background-position: center;
@@ -443,4 +440,55 @@ ul.recipe-detail__check-box-list label.square::after {
   padding-top: 20px;
   padding-left: 15px;
   line-height: 2;
-}/*# sourceMappingURL=style.css.map */
+}
+
+.form_login {
+  width: 45rem;
+  margin: 7rem auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Styles responsifs */
+}
+.form_login h1 {
+  text-align: center;
+  color: #333;
+}
+.form_login label {
+  display: block;
+  margin-bottom: 1rem;
+  color: #555;
+}
+.form_login input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
+}
+.form_login button {
+  background-color: #FE4A49;
+  display: block;
+  margin: auto;
+  width: 14rem;
+  color: white;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+.form_login button:hover {
+  background-color: rgb(198, 198, 198);
+}
+.form_login p {
+  color: #333;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+@media screen and (max-width: 600px) {
+  .form_login .form_login {
+    max-width: 100%;
+  }
+}/*# sourceMappingURL=form_user.css.map */

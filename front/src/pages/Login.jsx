@@ -29,7 +29,7 @@ const Login = () => {
 
 
     return (
-        <form method='post' onSubmit={handleSubmit}>
+        <form className='form_login' method='post' onSubmit={handleSubmit}>
         <h1> Se connecter !</h1>
             <label>
                 Email : 
@@ -42,7 +42,7 @@ const Login = () => {
             </label>  <br/><br/>
 
             <label>
-                Email : 
+                Mot de passe : 
                 <input 
                 type="password" 
                 name="password"
