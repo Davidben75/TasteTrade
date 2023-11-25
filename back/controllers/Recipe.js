@@ -130,20 +130,20 @@ export const UpdateOneRecipeSubmit = async (req, res) => {
 
 // Delete one recipe
 export const DeleteOneRecipe = async (req, res) => {
-    const {id} = req.params;
+    const { _id } = req.body;
     try {
-        let deleteRecipe = await Recipe.deleteOne({_id : id })
+        const deleteRecipe = await Recipe.deleteOne({ _id: _id });
 
-        if(!deleteRecipe){return res.send("Recette introuvable")};
+        if (!deleteRecipe.deletedCount) {
+            return res.status(404).json({ message: "Recette introuvable" });
+        }
 
-        res.status(200);
+        res.status(200).json({ message: "Recette supprimée avec succès" });
     } catch (error) {
-        res.status(400)
-        console.log(error)
+        console.error(error);
+        res.status(400).json({ message: "Erreur lors de la suppression de la recette" });
     }
-
-
-}
+};
 
 // Get recipe by category 
 export const GetRecipeByCategory = async (req, res) => {

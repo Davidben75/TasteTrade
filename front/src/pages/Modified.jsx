@@ -53,9 +53,11 @@ const Modified = () => {
 
     const handleStepChange = (e, index) => {
         const { value} = e.target;
-        const updatedSteps = {...recipeData.steps};
-        updatedSteps[index] = value;
-        setRecipeData({...recipeData, steps : updatedSteps});
+        setRecipeData(prevRecipeData => {
+            const updatedSteps = [...prevRecipeData.steps];
+            updatedSteps[index] = value;
+            return { ...prevRecipeData, steps: updatedSteps };
+        });
     }
 
     const handleProfileChange = (e) => {
@@ -66,11 +68,26 @@ const Modified = () => {
     const handleImagesChange = (e) => {
         setImages(e.target.files)
     }
-
-    // const handleImagesChange = (e) => {
-    //     const files = e.target.files
-    //     setImages(files)
-    // };
+    const addIngredient = (e) => {
+        e.preventDefault();
+        setRecipeData({
+          ...recipeData,
+          ingredients: [
+            ...recipeData.ingredients,
+            { amount: "", ingredient: "", unit: "" },
+          ],
+        });
+      };
+    
+      const addStep = (e) => {
+        e.preventDefault();
+        const updatedSteps = [...recipeData.steps];
+        updatedSteps.push("");
+        setRecipeData({
+          ...recipeData,
+          steps: updatedSteps,
+        });
+      };
     
 
     const handleSubmit = async (e) => {
@@ -191,8 +208,9 @@ const Modified = () => {
                     </span>
         
                 )}
+                
             </label>
-
+            <button onClick={addIngredient}>Ajouter un ingrédient</button>
             <br />
 
            { /* INPUT FOR SERVE */}              
@@ -264,11 +282,12 @@ const Modified = () => {
                     <label> Étape {index + 1}
                         <input 
                         type="text" 
-                        value={step}
+                        value={step || ""}
                         onChange={(e) => handleStepChange(e, index)}
                         />
                     </label>
                 )}
+                <button onClick={addStep}>Ajouter une étape</button>
             </span> 
 
             <br /> 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Icon from "react-icons-kit";
 import { NavLink, useParams } from "react-router-dom";
 import {edit} from 'react-icons-kit/feather/edit'
+import {trash2} from 'react-icons-kit/feather/trash2'
 
 const CategoryCard = () => {
     const [recipes, setRecipes] = useState([]);
@@ -32,6 +33,9 @@ const CategoryCard = () => {
               <span className="card-icon">
                 <NavLink to={`/modifier/${recipe._id}`}>
                 <Icon icon={edit} size={14}/>
+                </NavLink>
+                <NavLink to={`/supprimer/${recipe._id}`}>
+                  <Icon icon={trash2} size={14}/>
                 </NavLink>
               </span>
               <img className="card-image" src={`${process.env.REACT_APP_API}/img/recipe/${recipe.images[0].src}`} alt={`${process.env.REACT_APP_API}/img/${recipe.images[0].alt}`} />

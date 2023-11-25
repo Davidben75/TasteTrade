@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const Test = () => {
+const NewRecipe = () => {
   const [recipeData, setRecipeData] = useState({
     name: "",
     category: "entrée",
@@ -51,11 +51,10 @@ const Test = () => {
 
   const handleStepChange = (e, index) => {
     const { value } = e.target;
-    const updatedSteps = [...recipeData.steps];
-    updatedSteps[index] = value;
-    setRecipeData({
-      ...recipeData,
-      steps: updatedSteps,
+    setRecipeData(prevRecipeData => {
+      const updatedSteps = [...prevRecipeData.steps];
+      updatedSteps[index] = value;
+      return { ...prevRecipeData, steps: updatedSteps };
     });
   };
 
@@ -80,43 +79,48 @@ const Test = () => {
     });
   };
 
-  const handleSubmit =  (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (recipeData.profile.length === 0) {
-      return console.log("c'est vide");
+    
+    
+    if(recipeData.profile.length === 0){
+        return console.log("c'est vide")
     }
-
+    
     const formData = new FormData();
 
     for (let key in recipeData) {
-      if (Array.isArray(recipeData[key])) {
-        // Gestion des tableau et tableau d'objet
-        recipeData[key].forEach((item, index) => {
-          for (let itemKey in item) {
-            formData.append(`${key}[${index}][${itemKey}]`, item[itemKey]);
-          }
-        });
-      } else if (typeof recipeData[key] === "object") {
-        // Gestions des objet comme time
-        for (let subKey in recipeData[key]) {
-          formData.append(`${key}[${subKey}]`, recipeData[key][subKey]);
+
+        if(key === "steps"){
+            formData.append('steps', JSON.stringify(recipeData.steps))
+            continue;
         }
-      } else {
-        formData.append(key, recipeData[key]);
-      }
-    }
 
+        if (Array.isArray(recipeData[key])) {    
+            recipeData[key].forEach((item, index) => {
+                for (let itemKey in item) {
+                    formData.append(`${key}[${index}][${itemKey}]`, item[itemKey]);
+                }
+            });
+        } else if (typeof recipeData[key] === 'object') {
+            // Gestions des objet comme time
+            for (let subKey in recipeData[key]) {
+            formData.append(`${key}[${subKey}]`, recipeData[key][subKey]);
+            }
+        } else {
+            formData.append(key, recipeData[key]);
+        }
+    }  
+    formData.append('images', image[0])
 
-    console.log(recipeData)
-    // Gestion Une seule images
-    formData.append("images", image[0]);
-
-    // await axios.post(`${process.env.REACT_APP_API}/new`, formData)
-    //   .then((res) => {
-    //     console.log(res.data.message);
-    //   });
-  };
+    
+    await axios.post(`${process.env.REACT_APP_API}/new`, formData)
+        .then((res) => {
+            console.log(res.data)
+            console.log(formData)
+        })
+};
 
   return (
     <form onSubmit={handleSubmit} method="post" encType="multipart/form-data">
@@ -329,4 +333,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default NewRecipe;
