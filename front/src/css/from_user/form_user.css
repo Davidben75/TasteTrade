@@ -48,6 +48,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  padding: 2rem 0;
+  margin-bottom: 3rem;
 }
 .nav li {
   list-style: none;
@@ -58,18 +60,15 @@ body {
 .nav-menu a {
   color: black;
 }
-
 .nav-brand {
   text-transform: uppercase;
 }
-
 .nav-menu {
   display: flex;
   align-items: center;
   justify-content: space-around;
   gap: 3rem;
 }
-
 .nav-toggler {
   display: none;
 }
@@ -79,6 +78,43 @@ body {
   margin: 0.4rem;
   background: rgb(204, 204, 204);
   transition: 0.3s ease-in;
+}
+.nav_category {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f4f4f4;
+  padding: 1rem;
+}
+@media screen and (max-width: 600px) {
+  .nav_category {
+    flex-direction: column;
+  }
+  .nav_category a {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .nav_category a figure {
+    margin-bottom: 0.5rem;
+  }
+}
+.nav_category a {
+  text-decoration: none;
+  color: #333;
+}
+.nav_category a:hover {
+  color: rgb(198, 198, 198);
+}
+.nav_category a figure {
+  text-align: center;
+}
+.nav_category a figure img {
+  width: 50px; /* Ajustez la taille de l'image selon vos besoins */
+  height: auto;
+}
+.nav_category a figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 2rem;
+  text-transform: uppercase;
 }
 
 .login-btn {
@@ -157,27 +193,71 @@ body {
   padding: 0;
 }
 
-.form-container {
-  margin: 0, auto;
-  display: flex;
+.from_recipe {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 80vh;
-  margin: 4rem auto;
-  align-items: center;
-  font-size: 1.7rem;
-  max-width: 50%;
+.from_recipe div {
+  margin-bottom: 15px;
+}
+.from_recipe div label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+.from_recipe div input,
+.from_recipe div select,
+.from_recipe div textarea,
+.from_recipe div button,
+.from_recipe div span {
   width: 100%;
-  border-radius: 1rem;
-  background: rgb(119, 205, 149);
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-.form-container .form {
+.from_recipe div span {
+  display: flex;
+  flex-wrap: wrap;
+}
+.from_recipe div span label {
+  margin-right: 15px;
+}
+.from_recipe div span label input {
+  margin-right: 5px;
+}
+.from_recipe div button {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+.from_recipe div button:hover {
+  background-color: #45a049;
+}
+.from_recipe div input[type=file] {
+  border: none;
+  padding: 0;
+}
+.from_recipe div div {
   display: flex;
   flex-direction: column;
+}
+.from_recipe div div label {
+  margin-bottom: 5px;
+}
+.from_recipe div div input,
+.from_recipe div div select {
+  margin-bottom: 10px;
+}
+@media screen and (max-width: 600px) {
+  .from_recipe {
+    max-width: 100%;
+  }
 }
 
 .validated {
@@ -214,19 +294,6 @@ body {
     justify-content: center;
   }
 }
-.flex {
-  display: flex;
-  justify-content: space-evenly;
-  max-width: 90%;
-}
-.flex figure {
-  width: 10%;
-  align-items: center;
-}
-.flex figure img {
-  width: 100%;
-}
-
 .page-header {
   height: 20rem;
   background-position: center;
@@ -489,6 +556,78 @@ ul.recipe-detail__check-box-list label.square::after {
 }
 @media screen and (max-width: 600px) {
   .form_login .form_login {
+    max-width: 100%;
+  }
+}
+
+.form_recipe_edit {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form_recipe_edit label {
+  display: block;
+  margin-bottom: 10px;
+}
+.form_recipe_edit label input,
+.form_recipe_edit label select,
+.form_recipe_edit label textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.form_recipe_edit label span {
+  display: flex;
+  flex-wrap: wrap;
+}
+.form_recipe_edit label span input,
+.form_recipe_edit label span select {
+  flex: 1;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.form_recipe_edit label span input:last-child,
+.form_recipe_edit label span select:last-child {
+  margin-right: 0;
+}
+.form_recipe_edit label button {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+}
+.form_recipe_edit label button:hover {
+  background-color: #45a049;
+}
+.form_recipe_edit label textarea {
+  resize: vertical;
+}
+.form_recipe_edit label input[type=file] {
+  border: none;
+  padding: 0;
+}
+.form_recipe_edit span {
+  display: flex;
+  flex-wrap: wrap;
+}
+.form_recipe_edit span label {
+  flex: 1;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.form_recipe_edit span label:last-child {
+  margin-right: 0;
+}
+@media screen and (max-width: 600px) {
+  .form_recipe_edit {
     max-width: 100%;
   }
 }/*# sourceMappingURL=form_user.css.map */

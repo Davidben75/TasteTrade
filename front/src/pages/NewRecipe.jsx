@@ -123,7 +123,8 @@ const NewRecipe = () => {
 };
 
   return (
-    <form onSubmit={handleSubmit} method="post" encType="multipart/form-data">
+
+    <form className="from_recipe" onSubmit={handleSubmit} method="post" encType="multipart/form-data">
       {/* RECIPE NAME */}
       <div>
         <label>Nom de la recette:</label>

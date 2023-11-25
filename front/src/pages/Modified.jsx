@@ -138,7 +138,7 @@ const Modified = () => {
     return (
         <>
         
-        <form  method="post" onSubmit={handleSubmit} encType="multipart/form-data">
+        <form className="form_recipe_edit" method="post" onSubmit={handleSubmit} encType="multipart/form-data">
             { /* INPUT FOR RECIPE NAME */} 
             <label> Nom de la recette :
                 <input 
