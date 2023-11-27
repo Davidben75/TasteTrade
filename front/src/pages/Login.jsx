@@ -1,65 +1,75 @@
-
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
-    const [message, setMessage] = useState()
-    const [user, setUser] = useState({
-        email : "",
-        password : ""
-    });
+  const navigate = useNavigate();
 
-    function handleChange (e) {
-        const {name, value} = e.target;
-        setUser({...user, [name] : value});
+  const [message, setMessage] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!user.email.trim() || !user.password.trim()) {
+      return alert("Veuillez remplir tous les champs.");
     }
 
-    function handleSubmit (e){
-        e.preventDefault();
-        if(!user.email){
-            return alert("Email vide")
-        } else if  (!user.password){
-            return alert("Mot de passe vide")
+    axios.post(`${process.env.REACT_APP_API}/login`, user)
+      .then((res) => {
+        if (res.data.token) {
+          localStorage.setItem("user", JSON.stringify(res.data));
+          // Change route if connexion success
+          navigate('/');
+          // Reload 
+          window.location.reload() 
         }
-        axios.post(`${process.env.REACT_APP_API}/login`, user)
-        .then((res) => {
-            setMessage(res.data)
-        })
-    }
+        setMessage(res.data.message);
+      })
+      .catch((error) => {
+        setMessage("Une erreur s'est produite lors de la connexion. Veuillez réessayer.");
+        console.error(error);
+      });
+  };
 
+  return (
+    <form className='form_login' method='post' onSubmit={handleSubmit}>
+      <h1>Se connecter !</h1>
+      <label>
+        Email :
+        <input
+          type="email"
+          name="email"
+          value={user.email}
+          onChange={handleChange}
+        />
+      </label> <br />
 
-    return (
-        <form className='form_login' method='post' onSubmit={handleSubmit}>
-        <h1> Se connecter !</h1>
-            <label>
-                Email : 
-                <input 
-                type="email" 
-                name="email" 
-                value={user.email}
-                onChange={handleChange}
-                />
-            </label>  <br/><br/>
+      <label>
+        Mot de passe :
+        <input
+          type="password"
+          name="password"
+          onChange={handleChange}
+        />
+      </label> <br />
 
-            <label>
-                Mot de passe : 
-                <input 
-                type="password" 
-                name="password"
-                onChange={handleChange}
-                 />
-            </label>  <br/><br/>
+      <button type='submit'>
+        Se connecter
+      </button>
 
-            <button type='submit'>
-                Se connecter
-            </button>
-
-            {message && (
-                <p>{message}</p>
-            )}
-
-        </form>
-    );
+      {message && (
+        <p>{message}</p>
+      )}
+    </form>
+  );
 };
 
 export default Login;

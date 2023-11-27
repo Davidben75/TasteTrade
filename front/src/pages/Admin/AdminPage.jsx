@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import Icon from "react-icons-kit";
+import { trash2 } from 'react-icons-kit/feather/trash2';
+import { edit } from "react-icons-kit/feather/edit";
 
 
 const AdminPage = () => {
@@ -39,9 +42,10 @@ const AdminPage = () => {
 
     return (
         <>
+        <section className="admin_detail">
         <h1>Tableau de bord administrateur</h1>
         {recipes &&(
-            <table>
+            <table className="table_adimn">
           <thead>
             <tr>
               <th>Nom de la recette</th>
@@ -54,16 +58,23 @@ const AdminPage = () => {
               <tr key={index}>
                 <td>{recipe.name}</td>
                 <td>{recipe.createdAt}</td>
-                <td>
-                  <NavLink to={`/recette/${recipe._id}`}>Voir</NavLink>{' '}
-                  <NavLink to={`/modifier/${recipe._id}`}>Éditer</NavLink>{' '}
-                  <button onClick={ (e) => handleDelete(recipe._id, recipe.name)}>Supprimer</button>
+                <td className="action">
+                  <NavLink to={`/recette/${recipe._id}`}>Voir</NavLink>
+                  <NavLink to={`/modifier/${recipe._id}`}> <Icon icon={edit}/>Éditer</NavLink>
+                  <button onClick={ (e) => handleDelete(recipe._id, recipe.name)}> <Icon icon={trash2}/> Supprimer</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
         )}
+
+        <NavLink className="add_recipe_link" to={"/ajout"}>
+              Ajouter une nouvelle recette
+        </NavLink>
+        
+
+        </section>
         
         </>
       

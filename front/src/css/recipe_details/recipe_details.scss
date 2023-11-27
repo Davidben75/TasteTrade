@@ -1,0 +1,43 @@
+@import "../style.scss";
+
+.recipe_detail{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+
+    ul{
+        list-style: none;
+    }
+
+    .main_info{
+        display: flex;
+        justify-content: space-evenly;
+        padding: 2.5rem;
+    }
+
+    .icons{
+        color: rgb(255, 192, 76);
+    }
+
+    .recipe_detail_list{
+       
+        h2{
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+        }
+          
+        h2:after {
+            content: "";
+            display: inline-flex;
+            height: 1rem;
+            width: 100%;
+            border-top: 1px solid black;
+            margin-top: 0.5rem; /* Ajustez la marge selon vos besoins */
+            clear: both; /* Assurez-vous de gérer correctement le flottement des éléments */
+        }
+    }
+}
+

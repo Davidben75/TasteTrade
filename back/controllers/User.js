@@ -1,14 +1,18 @@
 import User from "../models/UserModel.js";
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 
 // Controller to Login
 export const LoginSubmit = async (req, res) => {
+
     try {
         const {email, password} = req.body
+        console.log(req.body)
         let user = await User.findOne({email: email})
         
         if(!user){
-            return res.jon("Utilisateur introuvable")
+            console.error("Nop")
+            return res.json("Utilisateur introuvable")
         }
         
         // bcrypt.compareSync() attend deux arguments, le premier la valeur de l'input, le 2e est le hash du mot de passe
@@ -17,7 +21,17 @@ export const LoginSubmit = async (req, res) => {
         if(!passwordCorrect){
             res.status(400).json("Mot de passe incorrect, try again!")
         }
-        res.status(200).json("Super tu es désormais connecté")
+        
+        const token  = jwt.sign({id : user.id}, process.env.JWT_SECRET, {expiresIn : "24h"})
+
+
+        res.status(200).json({
+            id : user._id,
+            email : user.email,
+            username : user.username,
+            role : user.role,
+            token : token
+        })
         
     } catch (error) {
         res.status(400).json("Impossible de se connecter")
@@ -54,4 +68,29 @@ export const RegisterSubmit = async (req, res) =>  {
     } catch (error) {
         res.json({message : "Impossible de vous compter parmis nos membre"})
     }
+}
+
+// GET ALLL USERS
+export const GetAllUsers = async (req, res) =>{
+
+    try {
+        const users = await User.find({}).select('email role createdAt -_id')
+    
+        if(!users){
+            return res.json({message:"Pas d'utilisateur trouvé"})
+        }
+
+        // Attention on ne renvoie pas le mot de passe
+        console.log(users);
+        res.json(users)
+        
+    } catch (error) {
+        res.status(400).json(error)
+    }
+
+    
+    
+    
+    
+    
 }

@@ -15,10 +15,12 @@ html {
 body {
   font-size: 1.7rem;
   font-family: Roboto, Arial, Helvetica, sans-serif;
+  background-color: #efefef;
 }
 
 .header {
   box-shadow: 0rem 0.1rem 2em lightgray;
+  background-color: #ffffff;
 }
 
 .container {
@@ -50,6 +52,7 @@ body {
   justify-content: space-around;
   padding: 2rem 0;
   margin-bottom: 3rem;
+  background-color: #ffffff;
 }
 .nav li {
   list-style: none;
@@ -275,6 +278,7 @@ body {
   .nav-toggler {
     display: block;
     cursor: pointer;
+    z-index: 1000;
   }
   .nav-menu {
     position: fixed;

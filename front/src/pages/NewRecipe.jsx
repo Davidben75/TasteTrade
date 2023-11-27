@@ -5,7 +5,7 @@ const NewRecipe = () => {
   const [recipeData, setRecipeData] = useState({
     name: "",
     category: "entrée",
-    difficulty: "facile",
+    difficulty: "- -",
     ingredients: [{ amount: 0, ingredient: "", unit: "" }],
     serve: 1,
     time: { preparation: 0, repos: 0, cook: 0 },
@@ -158,7 +158,7 @@ const NewRecipe = () => {
           value={recipeData.difficulty}
           onChange={handleInputChange}
         >
-          <option value="null"> dazdazd </option>
+          <option value="null"> - - </option>
           <option value="facile">Facile</option>
           <option value="moyen">Moyen</option>
           <option value="difficile">Difficile</option>

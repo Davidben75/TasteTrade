@@ -1,1 +1,54 @@
-/*# sourceMappingURL=admin.css.map */
+.admin_detail {
+  background-color: #ffffff;
+  padding: 1rem;
+}
+.admin_detail .add_recipe_link {
+  margin: 2rem 0;
+  padding: 0.7rem;
+  border-radius: 1rem;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+}
+.admin_detail .add_recipe_link :hover {
+  color: darkblue;
+}
+
+.table_adimn {
+  width: 100%;
+  border-collapse: collapse;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.table_adimn th, .table_adimn td {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  text-align: left;
+}
+.table_adimn th {
+  background-color: #f2f2f2;
+}
+.table_adimn .action {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.table_adimn td a {
+  color: #3498db;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+.table_adimn td a:hover {
+  text-decoration: underline;
+}
+.table_adimn td button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  cursor: pointer;
+}
+.table_adimn td button:hover {
+  background-color: #c0392b;
+}/*# sourceMappingURL=admin.css.map */

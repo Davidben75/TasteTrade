@@ -29,16 +29,18 @@ html{
 body {
     font-size: $text-normal;
     font-family: Roboto ,Arial, Helvetica, sans-serif;
+    background-color: #efefef;
 }
 
 .header {
     box-shadow: 0rem 0.1rem 2em lightgray;
+    background-color: #ffffff;
+    
 }
 
 .container{
     max-width: 90%;
     margin: 0 auto;
-    
 }
 
 // NAVBAR Desktop
@@ -70,6 +72,7 @@ body {
     justify-content: space-around;
     padding: 2rem 0;
     margin-bottom: 3rem;
+    background-color: #ffffff;
     li {
         list-style: none;
       }
@@ -177,6 +180,8 @@ body {
     background-color: #00000075;
     transition: 0.5s;
 }
+
+
 
 
 
@@ -349,6 +354,7 @@ body {
         &-toggler {
             display: block;
             cursor: pointer;
+            z-index: 1000;
           }
         
           &-menu {

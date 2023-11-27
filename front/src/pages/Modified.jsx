@@ -17,12 +17,7 @@ const Modified = () => {
         steps: [''],
         profile: [],
         note: '',
-    })
-
-    const units = ["- -", "kg", "g", "mg", "l", "cl", "ml", "c.à.s", "c.à.c"];
-
-    const profiles = ["vegetarian","gluten_free","lazy","dairy_free","fish","salad","vegan","meat",]
-    
+    })    
 
     const [images, setImages] = useState(null)
    
@@ -138,207 +133,215 @@ const Modified = () => {
     return (
         <>
         
-        <form className="form_recipe_edit" method="post" onSubmit={handleSubmit} encType="multipart/form-data">
-            { /* INPUT FOR RECIPE NAME */} 
-            <label> Nom de la recette :
-                <input 
-                type="text"  
-                name="name" 
-                value={recipeData.name} 
-                onChange={handleInputChange}
-                />
-            </label>
 
-            <br />
-            { /* INPUT FOR CATEGORY */} 
-            <label>Catégorie de la recette :
 
-                <select name="category" 
-                value={recipeData.category} 
-                onChange={handleInputChange}>
+        <form className="from_recipe" onSubmit={handleSubmit} method="post" encType="multipart/form-data">
+      {/* RECIPE NAME */}
+      <div>
+        <label>Nom de la recette:</label>
+        <input
+          type="text"
+          name="name"
+          value={recipeData.name}
+          onChange={handleInputChange}
+        />
+      </div>
 
-                <option value="entrée">Entrée</option>
-                <option value="plat">Plat</option>
-                <option value="dessert">Dessert</option>
-                </select>
-            </label>
+      {/* RECIPE CATEGORY */}
+      <div>
+        <label>Catégorie:</label>
+        <select
+          name="category"
+          value={recipeData.category}
+          onChange={handleInputChange}
+        >
+          <option value="entrée">Entrée</option>
+          <option value="plat">Plat</option>
+          <option value="dessert">Dessert</option>
+        </select>
+      </div>
 
-            <br />
-            { /* INPUT FOR DIFFICULTY */} 
-            <label> Niveau de difficulté :
+      {/* RECIPE DIFFICULTY*/}
+      <div>
+        <label>Niveau de difficulté:</label>
+        <select
+          name="difficulty"
+          value={recipeData.difficulty}
+          onChange={handleInputChange}
+        >
+          <option value="null"> - - </option>
+          <option value="facile">Facile</option>
+          <option value="moyen">Moyen</option>
+          <option value="difficile">Difficile</option>
+          <option value="extrême">Extrême</option>
+        </select>
+      </div>
 
-                <select 
-                name="difficulty" 
-                value={recipeData.difficulty} 
-                onChange={handleInputChange}>
+      <div>
+        <label>Ingrédients:</label>
+        {recipeData.ingredients.map((ingredient, index) => (
+          <div key={index}>
+            <input
+              type="number"
+              min={0}
+              name="amount"
+              value={ingredient.amount}
+              onChange={(e) => handleIngredientChange(e, index)}
+            />
 
-                    <option>  -- </option>
-                    <option value="facile">Facile</option>
-                    <option value="moyen">Moyen</option>
-                    <option value="difficile">Difficile</option>
-                    <option value="extrême">Extrême</option>
-                </select>
-            </label>
+            <select
+              name="unit"
+              value={ingredient.unit}
+              onChange={(e) => handleIngredientChange(e, index)}
+            >
+              {["- -", "kg", "g", "mg", "l", "cl", "ml", "c.à.s"].map(
+                (unit, unitIndex) => (
+                  <option key={unitIndex} value={unit}>
+                    {unit}
+                  </option>
+                )
+              )}
+            </select>
 
-            { /* INPUTS FOR INGREDIENTS */} 
-            <label > Ingrédients : 
-                {recipeData.ingredients.map((ingredient, index) =>
-                    <span key={index}>
-                    <input 
-                    type="number"
-                    min={0}
-                    name="amount"
-                    value={ingredient.amount} 
-                    onChange={(e) => handleIngredientChange(e, index)}/>
+            <input
+              type="text"
+              name="ingredient"
+              placeholder="Ingrédient"
+              value={ingredient.ingredient}
+              onChange={(e) => handleIngredientChange(e, index)}
+            />
+          </div>
+        ))}
+        <button onClick={addIngredient}>Ajouter un ingrédient</button>
+      </div>
 
-                    <select 
-                    name="unit" 
-                    value={ingredient.unit}
-                    onChange={(e) => handleIngredientChange(e, index)}>
-                        {units.map((unit, unitIndex) => 
-                            <option key={unitIndex} value={unit}>{unit}</option>
-                        )}
-                    </select>
+      <div>
+        <label>Nombre de portions : </label>
+        <input
+          type="number"
+          min={0}
+          name="serve"
+          value={recipeData.serve}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <h1>Temps (en minutes)</h1>
 
-                    <input 
-                    type="text"
-                    name="ingredient"
-                    value={ingredient.ingredient} 
-                    onChange={(e) => handleIngredientChange(e, index)}/>
-                    </span>
-        
-                )}
-                
-            </label>
-            <button onClick={addIngredient}>Ajouter un ingrédient</button>
-            <br />
+        <label> Préparation : </label>
+        <input
+          type="number"
+          min={0}
+          placeholder="Préparation (minutes)"
+          name="preparation"
+          value={recipeData.time.preparation}
+          onChange={handleInputChange}
+        />
 
-           { /* INPUT FOR SERVE */}              
+        <br />
+
+        <label> Repos : </label>
+        <input
+          type="number"
+          min={0}
+          placeholder="Repos (minutes)"
+          name="repos"
+          value={recipeData.time.repos}
+          onChange={handleInputChange}
+        />
+
+        <br />
+
+        <label>Cuisson : </label>
+        <input
+          type="number"
+          min={0}
+          name="cook"
+          value={recipeData.time.cook}
+          onChange={handleInputChange}
+        />
+        <br />
+      </div>
+      <div>
+        <label>Description:</label>
+        <textarea
+          name="description"
+          value={recipeData.description}
+          onChange={handleInputChange}
+        />
+      </div>
+
+      <div>
+        {recipeData.steps.map((step, index) => (
+          <div key={index}>
             <label>
-                <input 
-                type="number" 
-                name="serve"
-                min={0}
-                value={recipeData.serve} 
-                onChange={handleInputChange}
-                />
-            </label>
-
-            <br />
-            
-            {/* INPUTS FOR TIMES */}
-            <span>
-                <p>Temps en minutes :</p>
-
-                <label htmlFor="preparation"> Préparation :
-                    <input
-                    type="number"
-                    min={0}
-                    name="preparation"
-                    value={recipeData.time.preparation}
-                    onChange={handleInputChange}
-                    />
-                </label>
-
-
-                <label > Repos :
-                    <input
-                    type="number"
-                    min={0}
-                    name="repos"
-                    value={recipeData.time.repos}
-                    onChange={handleInputChange}
-                    />
-                </label>
-
-                <label htmlFor="cook"> Cuisson : 
-                    <input
-                    type="number"
-                    min={0}
-                    name="cook"
-                    value={recipeData.time.cook}
-                    onChange={handleInputChange}
-                    />
-                </label>
-            </span> 
-
-            <br />
-            
-            {/* INPUTS FOR DESCRIPTION */}
-            <label> Description :
-                <textarea name="description"  
-                cols="10" 
-                rows="10"
-                value={recipeData.description}
-                onChange={handleInputChange}
-                />
-            </label>
-
-            <br />
-            {/* INPUTS FOR STEPS */}
-            <span> 
-                <p> Les étapes à suivre :</p>
-                {recipeData.steps.map((step, index) => 
-                    <label> Étape {index + 1}
-                        <input 
-                        type="text" 
-                        value={step || ""}
-                        onChange={(e) => handleStepChange(e, index)}
-                        />
-                    </label>
-                )}
-                <button onClick={addStep}>Ajouter une étape</button>
-            </span> 
-
-            <br /> 
-            
-            
-            {/* CHECKBOX FOR  TYPE OF FOODS*/}
-            <span>
-                <p>Type de consommation :</p>
-                {profiles.map((profile, index) =>
-                <label key={index} name="profile">
-                    <input 
-                    type="checkbox"
-                    name={profile}
-                    onChange={handleProfileChange}
-                    />
-                    {profile}
-                    </label>
-                )}
-            </span>
-    
-            <label>Note:
-                <input
+              Etape {index + 1}
+              <input
                 type="text"
-                name="note"
-                value={recipeData.note}
-                onChange={handleInputChange}
-                />
-            </label>  
-
-            <label> Image 
-                <input 
-                type="file"
-                name='images'
-                onChange={handleImagesChange}
-                multiple 
-                />  
+                value={step}
+                placeholder={`Étape ${index + 1}`}
+                onChange={(e) => handleStepChange(e, index)}
+              />
             </label>
-       
+          </div>
+        ))}
+        <button onClick={addStep}>Ajouter une étape</button>
+      </div>
 
-            
-            
-            
-            
+      <div>
+        <span>
+          Type de consommation :
+          {[
+            "vegetarian",
+            "gluten_free",
+            "lazy",
+            "dairy_free",
+            "fish",
+            "salad",
+            "vegan",
+            "meat",
+          ].map((oneProfile, i) => (
+            <label key={i} name="profile">
+              <input
+                type="checkbox"
+                name={oneProfile}
+                onChange={handleProfileChange}
+              />
+              {oneProfile}
+            </label>
+          ))}
+        </span>
+      </div>
+      <div>
+        {/* Gérer l'ajout d'images ici (par exemple, avec react-dropzone) */}
+      </div>
 
+      <div>
+        <label>Note:</label>
+        <input
+          type="text"
+          name="note"
+          value={recipeData.note}
+          onChange={handleInputChange}
+        />
+      </div>
 
-                    
-            <button type="submit">
-                modifier
-            </button>
-            
-        </form>
+      <div>
+        <label> Image </label>
+        <input
+          type="file"
+          name="images"
+          onChange={handleImagesChange}
+          multiple
+          accept="/images"
+        />
+      </div>
+      <div>
+        <button type="submit" onClick={handleSubmit}>
+          Ajouter la recette
+        </button>
+      </div>
+    </form>
             
         </>
     );
