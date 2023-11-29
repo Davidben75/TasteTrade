@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+
   const [active, setActive] = useState("nav-menu");
   const [icon, setIcon] = useState("nav-toggler");
 
@@ -27,27 +28,24 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if(user) {
-      console.log("yes")
+    if(!user) {
+      return;
     }
     switch (user?.role) {
       case "user":
         setIsLogged(true);
         setIsAdmin(false);
-        console.log(isAdmin, isLogged);
         break;
       case "admin":
         setIsAdmin(true);
         setIsLogged(true);
-        console.log(isAdmin, isLogged);
         break;
       default:
         setIsAdmin(false);
         setIsLogged(false);
-        console.log(isAdmin, isLogged);
         break;
     }
-  }, [user]);
+  }, [user, isAdmin, isLogged]);
   
   return (
     <nav className="nav">
@@ -68,15 +66,16 @@ const Navbar = () => {
             À propos
           </NavLink>
         </li>
+
         {isAdmin ? 
           <li className="nav-item">
-          <NavLink to={"/data/admin/recipes"} className="nav-link">
-            Page Admin
-          </NavLink>
-        </li>
+            <NavLink to={"/data/admin/recipes"} className="nav-link">
+              Page Admin
+            </NavLink>
+          </li>
         : ""}
 
-        {isLogged || isAdmin ? (
+        {isLogged ? (
           <>
             <li className="nav-item login-btn">
               <NavLink to={"/"} onClick={handleLogOut} className="nav-link">
@@ -99,6 +98,7 @@ const Navbar = () => {
             </li>
           </>
         )}
+
       </ul>
       <div onClick={navToggle} className={icon}>
         <div className="line1"></div>

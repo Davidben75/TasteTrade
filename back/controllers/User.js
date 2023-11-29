@@ -1,6 +1,7 @@
 import User from "../models/UserModel.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import Recipe from "../models/RecipeModel.js";
 
 // Controller to Login
 export const LoginSubmit = async (req, res) => {
@@ -11,15 +12,14 @@ export const LoginSubmit = async (req, res) => {
         let user = await User.findOne({email: email})
         
         if(!user){
-            console.error("Nop")
-            return res.json("Utilisateur introuvable")
+            return res.status(404).json({message : "Mot de passe ou adresse mail incorrecte"})
         }
         
         // bcrypt.compareSync() attend deux arguments, le premier la valeur de l'input, le 2e est le hash du mot de passe
         // Il renvoie true ou false
         let passwordCorrect = bcrypt.compareSync(password, user.password) 
         if(!passwordCorrect){
-            res.status(400).json("Mot de passe incorrect, try again!")
+          return  res.status(404).json({message : "Mot de passe ou adresse mail incorrecte"});
         }
         
         const token  = jwt.sign({id : user.id}, process.env.JWT_SECRET, {expiresIn : "24h"})
@@ -93,4 +93,38 @@ export const GetAllUsers = async (req, res) =>{
     
     
     
+}
+
+// Saved a recipe 
+export const SavedRecipe = async (req, res) => {
+    try {
+        const {userID, recipeID} = req.body;
+        const recipe = await Recipe.findById(recipeID)
+        const user = await User.findById(userID)
+        user.favoris.push(recipe);
+        await user.save()
+
+        res.status(200).json({message : `${user.favoris}`})
+    } catch (error) {
+        res.json(error)
+    }
+};
+
+export const GetSavedRecipes = async (req, res) => {
+    try {
+        const user = await User.findById(req.body.userID)
+        res.status(200).json({favoris : user?.favoris})
+    } catch (error) {
+        res.json(error)
+    }
+};
+
+export const UserSavedRecipes = async (req, res) => {
+    try {
+        const user = await User.findById(req.body.userID);
+        const savedRecipes = await Recipe.find({ _id : {$in : user.favoris}})
+        res.json(savedRecipes)
+    } catch (error) {
+        res.json(error)
+    }
 }

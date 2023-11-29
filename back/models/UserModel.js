@@ -23,7 +23,7 @@ let userSchema=mongoose.Schema({
         default : "user"
     },
     favoris : {
-        type : Array
+        type : mongoose.Schema.Types.ObjectId, ref : "recipes",
     }
 },{
     timestamps : true

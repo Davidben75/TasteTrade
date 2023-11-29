@@ -22,14 +22,19 @@ app.use(express.urlencoded({extended: true}));
 // MIDLEWARE
 app.use(express.static("public"));
 
-app.use(cors());
+app.use(cors({
+    origin : "http://localhost:3000",
+    credentials : true
+}));
 
 
 app.use(recipeRouter);
 app.use(categoryRouter);
 app.use(userRouter);
 
+let PORT =  7023 ||  process.env.PORT ;
 // SERVEUR CONNECT
-app.listen(process.env.PORT, () => {
+app.listen( PORT, () => {
     console.log(`Le serveur est exécuté sur : ${process.env.BASE_URL}`)
+    console.log(PORT)
 })

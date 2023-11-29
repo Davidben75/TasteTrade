@@ -151,10 +151,12 @@ export const GetRecipeByCategory = async (req, res) => {
     console.log(name)
     try {
         const recipe = await Recipe.find({category : name});
+        const entrée = await Recipe.find({category : "entrée"})
         res.status(200).json(recipe);
+        console.log(entrée)
         
     } catch (error) {
-        res.status(400).json({message : "Impossible de voir les recettes " + name})
+        res.status(404).json({message : `Nous n'avons rien trouvé concernants les ${name}s`})
     }
     
 };

@@ -11,18 +11,24 @@ import Modified from "./pages/Modified";
 import OneCategory from "./pages/OneCategory";
 import RecipeDetail from "./pages/RecipeDetail";
 import NewRecipe from "./pages/NewRecipe";
-import AdminPage from "./pages/Admin/AdminPage";
-import { useState } from "react";
+import AdminPage from "./pages/Admin/AdminPage";  
 import AdminPageUsers from "./pages/Admin/AdminPageUsers";
+import NotFound from "./pages/NotFound";
 
 
 
 
 function App() {
-  // eslint-disable-next-line
-  const [isLoged , setIsLoged] = useState(false)
-  // eslint-disable-next-line
-  const [isAdmin , setIsAdmin] = useState(false)
+  
+  
+  
+  const user = JSON.parse(localStorage.getItem("user"))
+
+
+
+
+
+  console.log("User Role:", user ? user.role : "No user found"); 
 
   return (
 
@@ -30,8 +36,16 @@ function App() {
   <main className="container">
   <Routes>
     {/* Admin Routes */}
-    <Route path="/data/admin/recipes" element={<AdminPage/>}/>
-    <Route path="/data/admin/users" element={<AdminPageUsers/>}/>
+    {user && user.role === "admin" ? (
+      <>
+      <Route path="/data/admin/recipes" element={<AdminPage/>}/>
+      <Route path="/data/admin/users" element={<AdminPageUsers/>}/>
+      </>
+    ) : (
+      ""
+    )}
+    
+      <Route path="*" element={<NotFound/>}/>
 
     {/* Users Route */}
     
