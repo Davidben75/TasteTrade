@@ -17,7 +17,7 @@ const RecipeCard = ({recipes}) => {
             <article key={index} className="card">
               <figure className="card-body">
                 <span className="card-icon">
-                  <Saved/>
+                  <Saved recipeID={recipe._id}/>
                 </span>
                 <img className="card-image" src={`${process.env.REACT_APP_API}/img/recipe/${recipe.images[0].src}`} alt={`${process.env.REACT_APP_API}/img/${recipe.images[0].alt}`} />
   

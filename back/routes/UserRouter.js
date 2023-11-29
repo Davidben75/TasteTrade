@@ -1,5 +1,5 @@
 import express from 'express';
-import { GetAllUsers, GetSavedRecipes, LoginSubmit, RegisterSubmit, SavedRecipe, UserSavedRecipes } from '../controllers/User.js';
+import { GetAllUsers, GetSavedRecipes, LoginSubmit, RegisterSubmit, SavedRecipe, UserSavedRecipe  } from '../controllers/User.js';
 import { isAdmin, isLogged } from '../middlewares/auth.js';
 
 const   userRouter = express.Router();
@@ -11,11 +11,11 @@ userRouter.post("/login", LoginSubmit);
 
 userRouter.get("/all/users", isLogged, isAdmin, GetAllUsers)
 
-userRouter.put("/favorite", SavedRecipe)
+userRouter.put("/favorite", isLogged, SavedRecipe)
 
 userRouter.get("/favorite/ids", GetSavedRecipes)
 
-userRouter.get("/favorite/recipe", UserSavedRecipes)
+userRouter.get("/favorite/recipe", UserSavedRecipe)
 
 
 export default userRouter;

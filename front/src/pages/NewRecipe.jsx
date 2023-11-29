@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const NewRecipe = () => {
   const [recipeData, setRecipeData] = useState({
@@ -15,6 +16,7 @@ const NewRecipe = () => {
     note: "",
   });
   const [image, setImage] = useState(null);
+  const navigate = useNavigate()
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -117,8 +119,8 @@ const NewRecipe = () => {
     
     await axios.post(`${process.env.REACT_APP_API}/new`, formData)
         .then((res) => {
-            console.log(res.data)
-            console.log(formData)
+            alert("Recette bien enregistrée")
+            navigate("/")
         })
 };
 

@@ -22,9 +22,9 @@ let userSchema=mongoose.Schema({
         type : String,
         default : "user"
     },
-    favoris : {
+    favoris : [{
         type : mongoose.Schema.Types.ObjectId, ref : "recipes",
-    }
+    }]
 },{
     timestamps : true
 })

@@ -101,15 +101,18 @@ export const SavedRecipe = async (req, res) => {
         const {userID, recipeID} = req.body;
         const recipe = await Recipe.findById(recipeID)
         const user = await User.findById(userID)
+        console.log(user)
         user.favoris.push(recipe);
+        
         await user.save()
 
-        res.status(200).json({message : `${user.favoris}`})
+        res.status(200).json({message : `${user}`})
     } catch (error) {
         res.json(error)
     }
 };
 
+// GET ALL SAVED RECIPES
 export const GetSavedRecipes = async (req, res) => {
     try {
         const user = await User.findById(req.body.userID)
@@ -119,7 +122,7 @@ export const GetSavedRecipes = async (req, res) => {
     }
 };
 
-export const UserSavedRecipes = async (req, res) => {
+export const UserSavedRecipe = async (req, res) => {
     try {
         const user = await User.findById(req.body.userID);
         const savedRecipes = await Recipe.find({ _id : {$in : user.favoris}})
