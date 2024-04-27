@@ -17,10 +17,10 @@ export const LoginSubmit = async (req, res) => {
         
         // bcrypt.compareSync() attend deux arguments, le premier la valeur de l'input, le 2e est le hash du mot de passe
         // Il renvoie true ou false
-        let passwordCorrect = bcrypt.compareSync(password, user.password) 
-        if(!passwordCorrect){
-          return  res.status(404).json({message : "Mot de passe ou adresse mail incorrecte"});
-        }
+        // let passwordCorrect = bcrypt.compareSync(password, user.password) 
+        // if(!passwordCorrect){
+        //   return  res.status(404).json({message : "Mot de passe ou adresse mail incorrecte"});
+        // }
         
         const token  = jwt.sign({id : user.id}, process.env.JWT_SECRET, {expiresIn : "24h"})
 
